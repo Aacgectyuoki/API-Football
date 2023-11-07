@@ -1,0 +1,7 @@
+<div *ngIf="leaguesData">
+    <h2>{{ leaguesData.response[0].league.name }}</h2>
+    <p>Country: {{ leaguesData.response[0].country.name }}</p>
+    <img [src]="leaguesData.response[0].country.flag" alt="Flag" />
+    
+    <!-- You can add more league-specific information here as needed -->
+  </div>

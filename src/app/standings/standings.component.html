@@ -1,0 +1,32 @@
+<div *ngIf="standingsData">
+    <h2>{{ standingsData.response[0].league.name }} - {{ standingsData.response[0].league.season }}</h2>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Played</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>GD</th>
+          <th>Pts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let team of standingsData.response[0].league.standings[0]">
+          <td>
+            <img [src]="team.team.logo" alt="Team Logo" width="30" height="30">
+            <a (click)="viewTeamFixtures(team.team.id)">{{ team.team.name }}</a>
+          </td>
+          <td>{{ team.all.played }}</td>
+          <td>{{ team.all.win }}</td>
+          <td>{{ team.all.draw }}</td>
+          <td>{{ team.all.lose }}</td>
+          <td>{{ team.goalsDiff }}</td>
+          <td>{{ team.points }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ 

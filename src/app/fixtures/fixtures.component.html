@@ -1,0 +1,23 @@
+<div *ngIf="fixtures">
+    <h2>Last 10 Matches</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Home Team</th>
+          <th>Away Team</th>
+          <!-- Add other fixture information here -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fixture of fixtures">
+          <td>{{ fixture.fixture.date | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+          <td>{{ fixture.teams.home }}</td>
+          <td>{{ fixture.teams.away }}</td>
+          <!-- Add other fixture information here -->
+        </tr>
+      </tbody>
+    </table>
+    <!-- <button (click)="goToLeagueSelection()">Back to League Selection</button> -->
+  </div>
+  
