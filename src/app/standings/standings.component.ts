@@ -102,6 +102,6 @@ export class StandingsComponent implements OnInit {
   }
 
   viewTeamFixtures(teamId: number) {
-    this.router.navigate(['fixtures', teamId]);
+    this.router.navigate(['/fixtures', teamId]);
   }
 }

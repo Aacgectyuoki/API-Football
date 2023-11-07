@@ -2,19 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FixturesService } from '../fixtures.service';
 
-type Fixture = {
+interface Fixture {
   fixture: {
     id: number;
-    referee: string | null;
-    timezone: string;
     date: string;
-    timestamp: number;
-    periods: {
-      first: number;
-      second: number | null;
-    };
     venue: {
-      id: number;
       name: string;
       city: string;
     };
@@ -27,9 +19,7 @@ type Fixture = {
   league: {
     id: number;
     name: string;
-    country: string;
     logo: string;
-    flag: string;
     season: number;
     round: string;
   };
@@ -53,23 +43,23 @@ type Fixture = {
   };
   score: {
     halftime: {
-      home: number | null;
-      away: number | null;
+      home: number;
+      away: number;
     };
     fulltime: {
-      home: number | null;
-      away: number | null;
+      home: number;
+      away: number;
     };
     extratime: {
-      home: number | null;
-      away: number | null;
+      home: number;
+      away: number;
     };
     penalty: {
-      home: number | null;
-      away: number | null;
+      home: number;
+      away: number;
     };
   };
-};
+}
 
 @Component({
   selector: 'app-fixtures',
@@ -77,113 +67,32 @@ type Fixture = {
   styleUrls: ['./fixtures.component.css'],
 })
 export class FixturesComponent implements OnInit {
-  // teamId!: number;
-  // teamName!: string;
-  // fixtures: Fixture[] = [];
+  fixtures: Fixture[] = [];
+  teamId: number = 0;
 
-  // constructor(
-  //   private route: ActivatedRoute,
-  //   private fixturesService: FixturesService
-  // ) {}
+  constructor(
+    private fixturesService: FixturesService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  teamId!: number;
-fixtures: Fixture[] = []; // Define Fixture type
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.teamId = +params['teamId'];
 
-constructor(
-  private route: ActivatedRoute,
-  private fixturesService: FixturesService
-) {}
+      this.fixturesService.getFixtures(this.teamId).subscribe((data: Fixture[]) => {
+        this.fixtures = data;
+      });
+    });
+  }
 
-ngOnInit(): void {
-  this.route.params.subscribe((params) => {
-    this.teamId = +params['teamId'];
+  viewTeamFixtures(fixture: Fixture): void {
+    const teamId = fixture.teams.home.id === this.teamId ? fixture.teams.home.id : fixture.teams.away.id;
+    const homeOrAway = fixture.teams.home.id === this.teamId ? 'home' : 'away';
+    this.router.navigate(['/fixtures', teamId, homeOrAway]);
+  }
 
-    this.fixturesService.getFixturesForTeam(this.teamId).subscribe(
-      (data) => {
-        if (data && data.response) {
-          this.fixtures = data.response;
-        } else {
-          console.error('Error fetching fixtures for the team.');
-        }
-      },
-      (error) => {
-        console.error('HTTP request error:', error);
-      }
-    );
-  });
-}}
-  // ngOnInit(): void {
-  //   this.route.params.subscribe((params) => {
-  //     this.teamId = +params['teamId'];
-
-  //     this.fixturesService.getFixturesForTeam(this.teamId).subscribe(
-  //       (data) => {
-  //         if (data && data.response) {
-  //           this.fixtures = data.response;
-  //           this.displayLast10MatchesForTeam();
-  //         } else {
-  //           console.error('Error fetching fixtures for the team.');
-  //         }
-  //       },
-  //       (error) => {
-  //         console.error('HTTP request error:', error);
-  //       }
-  //     );
-  //   });
-  // }
-
-//   displayLast10MatchesForTeam(): void {
-//     const today = new Date();
-//     this.fixtures = this.fixtures
-//       .filter(
-//         (fixture) =>
-//           (fixture.teams.home.id === this.teamId ||
-//             fixture.teams.away.id === this.teamId) &&
-//           new Date(fixture.fixture.date) <= today
-//       )
-//       .slice(-10);
-//   }
-// }
-// export class FixturesComponent implements OnInit {
-//   teamId!: number;
-//   teamName!: string;
-//   fixtures: Fixture[] = [];
-
-//   constructor(
-//     private route: ActivatedRoute,
-//     private fixturesService: FixturesService
-//   ) {}
-
-//   ngOnInit(): void {
-//     this.route.params.subscribe((params) => {
-//       this.teamId = +params['teamId'];
-//       this.teamName = params['teamName'];
-
-//       this.fixturesService.getFixturesForTeam(this.teamId).subscribe(
-//         (data) => {
-//           if (data && data.response) {
-//             this.fixtures = data.response;
-//             this.displayLast10MatchesForTeam();
-//           } else {
-//             console.error('Error fetching fixtures for the team.');
-//           }
-//         },
-//         (error) => {
-//           console.error('HTTP request error:', error);
-//         }
-//       );
-//     });
-//   }
-
-//   displayLast10MatchesForTeam(): void {
-//     const today = new Date();
-//     this.fixtures = this.fixtures
-//       .filter(
-//         (fixture) =>
-//           (fixture.teams.home.id === this.teamId ||
-//             fixture.teams.away.id === this.teamId) &&
-//           new Date(fixture.fixture.date) <= today
-//       )
-//       .slice(-10);
-//   }
-// }
+  goBack(): void {
+    this.router.navigate(['/standings']);
+  }
+}
