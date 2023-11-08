@@ -3,22 +3,23 @@
       <th>Home Team Logo</th>
       <th>Home Team Name</th>
       <th>Home Team Score</th>
-      <th>-</th>
+      <th> </th>
       <th>Away Team Score</th>
       <th>Away Team Name</th>
       <th>Away Team Logo</th>
     </tr>
     <tr *ngFor="let fixture of fixtures">
-      <td><img [src]="fixture.teams.home.logo" alt="Home Team Logo"></td>
+      <td><img [src]="fixture.teams.home.logo" alt="Home Team Logo" class="logo"></td>
       <td>{{ fixture.teams.home.name }}</td>
       <td>{{ fixture.score.fulltime.home }}</td>
       <td>-</td>
       <td>{{ fixture.score.fulltime.away }}</td>
       <td>{{ fixture.teams.away.name }}</td>
-      <td><img [src]="fixture.teams.away.logo" alt="Away Team Logo"></td>
+      <td><img [src]="fixture.teams.away.logo" alt="Away Team Logo" class="logo"></td>
     </tr>
   </table>
-  <button (click)="goBack()">Go Back</button>
+  <button (click)="goBack(fixtures.length > 0 ? fixtures[0].league.id : null)">Go Back</button>
+
   
   
   

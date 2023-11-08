@@ -2,11 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FixturesService } from '../fixtures.service';
 
+interface FixtureData {
+  get: string;
+  parameters: {
+    live: string;
+  };
+  errors: any[]; // You might want to define a more specific type for errors
+  results: number;
+  paging: {
+    current: number;
+    total: number;
+  };
+  response: Fixture[];
+}
+
 interface Fixture {
   fixture: {
     id: number;
+    referee: string | null;
+    timezone: string;
     date: string;
+    timestamp: number;
+    periods: {
+      first: number;
+      second: number | null;
+    };
     venue: {
+      id: number;
       name: string;
       city: string;
     };
@@ -19,23 +41,15 @@ interface Fixture {
   league: {
     id: number;
     name: string;
+    country: string;
     logo: string;
+    flag: string;
     season: number;
     round: string;
   };
   teams: {
-    home: {
-      id: number;
-      name: string;
-      logo: string;
-      winner: boolean;
-    };
-    away: {
-      id: number;
-      name: string;
-      logo: string;
-      winner: boolean;
-    };
+    home: Team;
+    away: Team;
   };
   goals: {
     home: number;
@@ -47,18 +61,25 @@ interface Fixture {
       away: number;
     };
     fulltime: {
-      home: number;
-      away: number;
+      home: number | null;
+      away: number | null;
     };
     extratime: {
-      home: number;
-      away: number;
+      home: number | null;
+      away: number | null;
     };
     penalty: {
-      home: number;
-      away: number;
+      home: number | null;
+      away: number | null;
     };
   };
+}
+
+interface Team {
+  id: number;
+  name: string;
+  logo: string;
+  winner: boolean;
 }
 
 @Component({
@@ -80,8 +101,8 @@ export class FixturesComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.teamId = +params['teamId'];
 
-      this.fixturesService.getFixtures(this.teamId).subscribe((data: Fixture[]) => {
-        this.fixtures = data;
+      this.fixturesService.getFixtures(this.teamId).subscribe((data: FixtureData) => { // Use FixtureData here
+        this.fixtures = data.response; // Assuming the fixtures are in the 'response' property
       });
     });
   }
@@ -92,7 +113,15 @@ export class FixturesComponent implements OnInit {
     this.router.navigate(['/fixtures', teamId, homeOrAway]);
   }
 
-  goBack(): void {
-    this.router.navigate(['/standings']);
+  goBack(previousLeagueId: number | null): void {
+    if (previousLeagueId !== null && (previousLeagueId == 39 || previousLeagueId == 140
+      || previousLeagueId == 61 || previousLeagueId == 79 || previousLeagueId == 135)) {
+      const currentYear = new Date().getFullYear();
+      this.router.navigate(['/standings', previousLeagueId, currentYear]);
+    } else {
+      // Handle the case where there's no previous league ID, e.g., navigate to a default page
+      const currentYear = new Date().getFullYear();
+      this.router.navigate(['/standings', 39, currentYear]); // Replace 'default-page' with the actual URL you want to navigate to
+    }
   }
-}
+}  
