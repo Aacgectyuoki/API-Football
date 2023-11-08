@@ -9,11 +9,15 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   constructor(private router: Router) {}
 
+  isNavbarCollapsed = true;
+
+  // route to league based on league ID
   goToLeague(leagueId: number) {
     this.router.navigate(['/leagues', leagueId]);
   }
-
+  
+  // Use the router to navigate to the specified route
   navigateTo(route: string) {
-    this.router.navigate([route]); // Use the router to navigate to the specified route
+    this.router.navigate([route]); 
   }
 }

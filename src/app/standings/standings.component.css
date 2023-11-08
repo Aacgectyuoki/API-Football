@@ -1,0 +1,47 @@
+.max-width-container {
+    max-width: 100%;
+  }
+/*   
+  .max-width-table {
+    max-width: 100%;
+  } */
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .responsive-th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  @media (max-width: 768px) {
+    .responsive-th {
+      font-size: 12px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .responsive-th {
+      font-size: 10px;
+    }
+  }
+
+  .responsive-td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  @media (max-width: 768px) {
+    .responsive-td {
+      font-size: 12px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .responsive-td {
+      font-size: 10px;
+    }
+  }

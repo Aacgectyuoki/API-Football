@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StandingsService {
-  private apiUrl = 'https://v3.football.api-sports.io/standings';
+  private apiUrl = `https://${environment.rapidapiHost}/standings`;
 
   constructor(private http: HttpClient) {}
 
   getStandings(leagueId: number, season: number): Observable<any> {
     const headers = new HttpHeaders({
-      'x-rapidapi-host': 'v3.football.api-sports.io',
-      'x-rapidapi-key': 'a7d636044cd0089a178516baa2e132a6',
+      'x-rapidapi-host': environment.rapidapiHost,
+      'x-rapidapi-key': environment.rapidapiKey,
     });
 
     const params = new HttpParams()

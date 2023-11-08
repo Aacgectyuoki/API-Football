@@ -7,7 +7,7 @@ interface FixtureData {
   parameters: {
     live: string;
   };
-  errors: any[]; // You might want to define a more specific type for errors
+  errors: string[]; 
   results: number;
   paging: {
     current: number;
@@ -107,21 +107,25 @@ export class FixturesComponent implements OnInit {
     });
   }
 
+  /* view the team fixtures. 
+  the options would be either "away" or "home" because a team can either be away or home */
   viewTeamFixtures(fixture: Fixture): void {
     const teamId = fixture.teams.home.id === this.teamId ? fixture.teams.home.id : fixture.teams.away.id;
     const homeOrAway = fixture.teams.home.id === this.teamId ? 'home' : 'away';
     this.router.navigate(['/fixtures', teamId, homeOrAway]);
   }
 
+  // go back to standings page
   goBack(previousLeagueId: number | null): void {
     if (previousLeagueId !== null && (previousLeagueId == 39 || previousLeagueId == 140
       || previousLeagueId == 61 || previousLeagueId == 79 || previousLeagueId == 135)) {
       const currentYear = new Date().getFullYear();
       this.router.navigate(['/standings', previousLeagueId, currentYear]);
     } else {
-      // Handle the case where there's no previous league ID, e.g., navigate to a default page
+      /* Handle the case where there's no previous league ID, 
+      e.g., navigate to /standings/39/{currentYear} - Premier League (England) */
       const currentYear = new Date().getFullYear();
-      this.router.navigate(['/standings', 39, currentYear]); // Replace 'default-page' with the actual URL you want to navigate to
+      this.router.navigate(['/standings', 39, currentYear]);
     }
   }
 }  

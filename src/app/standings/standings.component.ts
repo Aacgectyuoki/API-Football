@@ -101,6 +101,8 @@ export class StandingsComponent implements OnInit {
     });
   }
 
+  /* navigate to the page that will show you the team fixtures 
+  (last 10 games of the clicked team) */
   viewTeamFixtures(teamId: number) {
     this.router.navigate(['/fixtures', teamId]);
   }

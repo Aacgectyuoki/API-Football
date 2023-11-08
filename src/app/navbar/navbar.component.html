@@ -1,13 +1,4 @@
-<!-- <nav>
-    <ul>
-      <li><a (click)="goToLeague(39)">England</a></li>
-      <li><a (click)="goToLeague(140)">Spain</a></li>
-      <li><a (click)="goToLeague(61)">France</a></li>
-      <li><a (click)="goToLeague(79)">Germany</a></li>
-      <li><a (click)="goToLeague(135)">Italy</a></li>
-    </ul>
-  </nav> -->
-<br>
+<!-- <br>
   <nav>
     <div class="centered-div">
       <button class="btn btn-primary" (click)="navigateTo('/standings/39/2023')">England</button>
@@ -17,5 +8,32 @@
       <button class="btn btn-primary" (click)="navigateTo('/standings/135/2023')">Italy</button>
     </div>
   </nav>
-  
+<br> -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="../assets/logo.png" style="height: 70px"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo('/standings/39/2023')">England</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo('/standings/140/2023')">Spain</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo('/standings/61/2023')">France</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo('/standings/79/2023')">Germany</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="navigateTo('/standings/135/2023')">Italy</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   

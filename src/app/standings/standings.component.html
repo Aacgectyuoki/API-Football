@@ -1,32 +1,38 @@
-<div *ngIf="standingsData">
+<div class="max-width-container" *ngIf="standingsData">
     <h2>{{ standingsData.response[0].league.name }} - {{ standingsData.response[0].league.season }}</h2>
   
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Team</th>
-          <th>Played</th>
-          <th>Wins</th>
-          <th>Draws</th>
-          <th>Losses</th>
-          <th>Goals Difference</th>
-          <th>Points</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let team of standingsData.response[0].league.standings[0]">
-          <td>
-            <img [src]="team.team.logo" alt="Team Logo" width="30" height="30">
-            <a (click)="viewTeamFixtures(team.team.id)">{{ team.team.name }}</a>
-          </td>
-          <td>{{ team.all.played }}</td>
-          <td>{{ team.all.win }}</td>
-          <td>{{ team.all.draw }}</td>
-          <td>{{ team.all.lose }}</td>
-          <td>{{ team.goalsDiff }}</td>
-          <td>{{ team.points }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- table head: shows the metadata of the standings -->
+    <div class="table-responsive">
+        <table class="table" style="max-width: 100%;">
+            <thead style="max-width: 100%;">
+                <tr>
+                    <th class="responsive-th">Team</th>
+                    <th class="responsive-th">Played</th>
+                    <th class="responsive-th">Wins</th>
+                    <th class="responsive-th">Draws</th>
+                    <th class="responsive-th">Losses</th>
+                    <th class="responsive-th">GD</th>
+                    <th class="responsive-th">Points</th>
+                </tr>
+            </thead>
+      
+            <!-- table body: shows the data of the recent standings of the selected league -->
+            <tbody>
+              <tr *ngFor="let team of standingsData.response[0].league.standings[0]">
+                <td class="responsive-td">
+                  <img [src]="team.team.logo" alt="Team Logo" width="30" height="30">
+                  <a (click)="viewTeamFixtures(team.team.id)">{{ team.team.name }}</a>
+                </td>
+                <td class="responsive-td">{{ team.all.played }}</td>
+                <td class="responsive-td">{{ team.all.win }}</td>
+                <td class="responsive-td">{{ team.all.draw }}</td>
+                <td class="responsive-td">{{ team.all.lose }}</td>
+                <td class="responsive-td">{{ team.goalsDiff }}</td>
+                <td class="responsive-td">{{ team.points }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    
   </div>
  
