@@ -45,3 +45,21 @@
       font-size: 10px;
     }
   }
+
+  .btn-linkd {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  @media (max-width: 768px) {
+    .btn-link {
+      font-size: 12px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .btn-link {
+      font-size: 10px;
+    }
+  }
