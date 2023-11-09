@@ -1,10 +1,10 @@
 .logo {
-    max-width: 40px;  /* You can adjust the size as needed */
-    max-height: 40px; /* You can adjust the size as needed */
+    max-width: 30px;  /* You can adjust the size as needed */
+    max-height: 30px; /* You can adjust the size as needed */
   }
 
   table {
-    width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
   }
 
@@ -26,12 +26,11 @@
   
   @media (max-width: 576px) {
     .responsive-th {
-      font-size: 10px;
+      font-size: 11px;
     }
   }
 
   .responsive-td {
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }

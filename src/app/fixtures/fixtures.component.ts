@@ -90,6 +90,7 @@ interface Team {
 export class FixturesComponent implements OnInit {
   fixtures: Fixture[] = [];
   teamId: number = 0;
+  selectedTeamName: string = '';
 
   constructor(
     private fixturesService: FixturesService,
@@ -103,6 +104,7 @@ export class FixturesComponent implements OnInit {
 
       this.fixturesService.getFixtures(this.teamId).subscribe((data: FixtureData) => { // Use FixtureData here
         this.fixtures = data.response; // Assuming the fixtures are in the 'response' property
+        this.selectedTeamName = this.getSelectedTeamName(data, this.teamId);
       });
     });
   }
@@ -113,6 +115,20 @@ export class FixturesComponent implements OnInit {
     const teamId = fixture.teams.home.id === this.teamId ? fixture.teams.home.id : fixture.teams.away.id;
     const homeOrAway = fixture.teams.home.id === this.teamId ? 'home' : 'away';
     this.router.navigate(['/fixtures', teamId, homeOrAway]);
+  }
+
+  getSelectedTeamName(data: FixtureData, teamId: number): string {
+    const fixture = data.response.find((f) =>
+      f.teams.home.id === teamId || f.teams.away.id === teamId
+    );
+  
+    if (fixture) {
+      return fixture.teams.home.id === teamId
+        ? fixture.teams.home.name
+        : fixture.teams.away.name;
+    }
+  
+    return '';
   }
 
   // go back to standings page
