@@ -1,48 +1,74 @@
-.logo {
-    max-width: 30px;  /* You can adjust the size as needed */
-    max-height: 30px; /* You can adjust the size as needed */
-  }
+.max-width-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
 
-  table {
-    max-width: 100%;
-    border-collapse: collapse;
-  }
+table {
+  width: 100%;
+  max-width: 95%;
+  border-collapse: collapse;
+  overflow: hidden;
+}
 
-  th, td {
-    text-align: center;
-    vertical-align: middle;
-  }
+th, td {
+  text-align: center;
+  vertical-align: middle;
+}
 
+.responsive-th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
   .responsive-th {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 12px;
   }
-  
-  @media (max-width: 768px) {
-    .responsive-th {
-      font-size: 12px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .responsive-th {
-      font-size: 11px;
-    }
-  }
+}
 
+@media (max-width: 576px) {
+  .responsive-th {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 476px) {
+  .responsive-th {
+    font-size: 8px;
+  }
+}
+
+.responsive-td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
   .responsive-td {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 12px;
   }
-  
-  @media (max-width: 768px) {
-    .responsive-td {
-      font-size: 12px;
-    }
+}
+
+@media (max-width: 576px) {
+  .responsive-td {
+    font-size: 10px;
   }
-  
-  @media (max-width: 576px) {
-    .responsive-td {
-      font-size: 10px;
-    }
+}
+
+@media (max-width: 476px) {
+  .responsive-td {
+    font-size: 8px;
   }
+}
+
+.logo {
+  max-width: 30px;
+  max-height: 30px;
+}
+
+@media (max-width: 476px) {
+  .logo {
+    max-width: 20px;
+    max-height: 20px;
+  }
+}
