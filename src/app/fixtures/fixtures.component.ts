@@ -7,13 +7,18 @@ interface FixtureData {
   parameters: {
     live: string;
   };
-  errors: string[]; 
+  errors: Error[];
   results: number;
   paging: {
     current: number;
     total: number;
   };
   response: Fixture[];
+}
+
+interface Error {
+  code: number;
+  message: string;
 }
 
 interface Fixture {

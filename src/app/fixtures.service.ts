@@ -9,13 +9,18 @@ interface FixtureData {
   parameters: {
     live: string;
   };
-  errors: any[]; // You might want to define a more specific type for errors
+  errors: Error[];
   results: number;
   paging: {
     current: number;
     total: number;
   };
   response: Fixture[];
+}
+
+interface Error {
+  code: number;
+  message: string;
 }
 
 interface Fixture {
